@@ -22,7 +22,7 @@ def check_for_update():
         version_url = "https://raw.githubusercontent.com/itoon/ota/main/version.txt?time="+time.time()
         code_url = "https://raw.githubusercontent.com/itoon/ota/main/main.py?time="+time.time()
 
-        current_version = "1.0.11"
+        current_version = "1.0.12"
         r = urequests.get(version_url)
         latest_version = r.text.strip()
         r.close()

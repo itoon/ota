@@ -1,6 +1,7 @@
 import network, time
 import urequests, machine, os
 from board import rgbled_board, motor
+import switch
 
 def connect_wifi(ssid, password):
     wlan = network.WLAN(network.STA_IF)
@@ -10,7 +11,7 @@ def connect_wifi(ssid, password):
         wlan.connect(ssid, password)
         while not wlan.isconnected():
             time.sleep(1)
-    print('Connected:', wlan.ifconfig())
+    print('Connected:', wlan.ifconfig())    
 
 connect_wifi("Hiran_2.4", "70913sathu")
 
@@ -18,10 +19,10 @@ def check_for_update():
     print("Checking for updates...")
     try:
         # Replace with your GitHub RAW or local server URL
-        version_url = "https://raw.githubusercontent.com/itoon/ota/main/version.txt"
-        code_url = "https://raw.githubusercontent.com/itoon/ota/main/main.py"
+        version_url = "http://192.168.1.153:8080/version.txt?time="+time.time()
+        code_url = "http://192.168.1.153:8080/main.py?time="+time.time()
 
-        current_version = "1.0.0"
+        current_version = "1.0.3"
         r = urequests.get(version_url)
         latest_version = r.text.strip()
         r.close()
@@ -40,9 +41,16 @@ def check_for_update():
         print("Update failed:", e)
 
 rgbled_board.clear()
-motor.turn_right(100, 1)
-rgbled_board.set_color(0, '#000000')
+motor.turn_left(50, 1)
+rgbled_board.set_color(0, '#0000ff')
+rgbled_board.set_color(1, '#0000ff')
 rgbled_board.show()
-while True:
+
+def SW1PressCB(_=None):
+    print("Already up to date.")
     check_for_update()
-pass
+switch.pressed(switch.SW1, SW1PressCB)
+
+while True:
+    
+    pass

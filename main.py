@@ -19,8 +19,8 @@ def check_for_update():
     print("Checking for updates...")
     try:
         # Replace with your GitHub RAW or local server URL
-        version_url = "http://192.168.1.153:8080/version.txt?time="+time.time()
-        code_url = "http://192.168.1.153:8080/main.py?time="+time.time()
+        version_url = "https://raw.githubusercontent.com/itoon/ota/main/version.txt?time="+time.time()
+        code_url = "https://raw.githubusercontent.com/itoon/ota/main/main.py?time="+time.time()
 
         current_version = "1.0.3"
         r = urequests.get(version_url)

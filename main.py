@@ -22,7 +22,7 @@ def check_for_update():
         version_url = "https://raw.githubusercontent.com/itoon/ota/main/version.txt?time="+time.time()
         code_url = "https://raw.githubusercontent.com/itoon/ota/main/main.py?time="+time.time()
 
-        current_version = "1.0.3"
+        current_version = "1.0.11"
         r = urequests.get(version_url)
         latest_version = r.text.strip()
         r.close()
@@ -42,8 +42,8 @@ def check_for_update():
 
 rgbled_board.clear()
 motor.turn_left(50, 1)
-rgbled_board.set_color(0, '#0000ff')
-rgbled_board.set_color(1, '#0000ff')
+rgbled_board.set_color(0, '#00ffff')
+rgbled_board.set_color(1, '#00ffff')
 rgbled_board.show()
 
 def SW1PressCB(_=None):
